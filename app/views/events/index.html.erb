@@ -1,0 +1,58 @@
+<h1>Welcome, <%= @user['first_name'] %>!</h1>
+<a href="/signout">Logout</a>
+<p>Here are some of the events in your state:</p>
+<table>
+	<thead>
+		<th>Name</th>
+		<th>Date</th>
+		<th>Location</th>
+		<th>Host</th>
+		<th>Action/Status</th>
+	</thead>
+	<!-- for each unjoined event -->
+	<tr> 
+		<td><a href="#">Event Name</a></td>
+		<td>Month day, year</td>
+		<td>City</td>
+		<td>ST</td>
+		<td><a href="#">Join</a></td>
+	</tr>
+	<!-- for each joined event -->
+	<tr>
+		<td><a href="#">Event Name</a></td>
+		<td>Month day, year</td>
+		<td>City</td>
+		<td>ST</td>
+		<td>Joining <a href="#">Cancel</a></td>
+	</tr>
+	<!-- for each owned event -->
+	<tr>
+		<td><a href="#">Event Name</a></td>
+		<td>Month day, year</td>
+		<td>City</td>
+		<td>ST</td>
+		<td><a href="#">Edit</a> <a href="#">Delete</a></td>
+	</tr>
+</table>
+
+<p>Here are some of the events at other states:</p>
+<table>
+	<thead>
+		<th>Name</th>
+		<th>Date</th>
+		<th>Location</th>
+		<th>State</th>
+		<th>Host</th>
+		<th>Action</th>
+	</thead>
+</table>
+
+<h2>Add Event</h2>
+<form>
+	Name: <input type="text">
+	Date: <input type="text">
+	Location:  <input type="text"> 
+	<select>
+		<option></option>
+	</select>
+</form>
