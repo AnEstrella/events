@@ -1,58 +1,140 @@
-<h1>Welcome, <%= @user['first_name'] %>!</h1>
-<a href="/signout">Logout</a>
-<p>Here are some of the events in your state:</p>
-<table>
-	<thead>
-		<th>Name</th>
-		<th>Date</th>
-		<th>Location</th>
-		<th>Host</th>
-		<th>Action/Status</th>
-	</thead>
-	<!-- for each unjoined event -->
-	<tr> 
-		<td><a href="#">Event Name</a></td>
-		<td>Month day, year</td>
-		<td>City</td>
-		<td>ST</td>
-		<td><a href="#">Join</a></td>
-	</tr>
-	<!-- for each joined event -->
-	<tr>
-		<td><a href="#">Event Name</a></td>
-		<td>Month day, year</td>
-		<td>City</td>
-		<td>ST</td>
-		<td>Joining <a href="#">Cancel</a></td>
-	</tr>
-	<!-- for each owned event -->
-	<tr>
-		<td><a href="#">Event Name</a></td>
-		<td>Month day, year</td>
-		<td>City</td>
-		<td>ST</td>
-		<td><a href="#">Edit</a> <a href="#">Delete</a></td>
-	</tr>
-</table>
+<body>
+<div class="header"><h1 class="header_text">Welcome, <%= session[:current_user_name] %>!</h1><a href="/signout" id="logout">Logout</a></div>
+<div class="events">
+	<fieldset>
+		<legend>Here are some of the events in your state:</legend>
+		<table class="events_table">
+			<thead>
+				<th>Name</th>
+				<th>Date</th>
+				<th>Location</th>
+				<th>Host</th>
+				<th>Action/Status</th>
+			</thead>
+			<!-- for each unjoined event in state -->
+			<% @events.each do |event| %>
+			<tr> 
+				<td><a href="#" class="event_link"><%= event.name %></a></td>
+				<td><%= event.date %></td>
+				<td><%= event.location %></td>
+				<td><%= event.user_id %></td>
+				<td><a href="join/<%= event.id %>">Join</a></td>
+			</tr>
+			<% end %>
+			<!-- for each joined event -->
+			<% @attending_events.each do |attending_event| %>
+			<tr> 
+				<td><a href="#" class="event_link"><%= attending_event.name %></a></td>
+				<td><%= attending_event.date %></td>
+				<td><%= attending_event.location %></td>
+				<td><%= attending_event.user_id %></td>
+				<td>Joining <a href="cancel/<%= attending_event.id %>">Cancel</a></td>
+			</tr>
+			<% end %>
+			<!-- for each owned event -->
+			<% @owned_events.each do |owned_event| %>
+			<tr>
+				<td><a href="#"><%= owned_event.name %></a></td>
+				<td><%= owned_event.date %></td>
+				<td><%= owned_event.location %></td>
+				<td><%= owned_event.user_id %></td>
+				<td><a href="edit/<%= owned_event.id %>">Edit</a> <a href="delete/<%= owned_event.id %>">Delete</a></td>
+			</tr>
+			<% end %>
+		</table>
+	</fieldset>
+</div>
 
-<p>Here are some of the events at other states:</p>
-<table>
-	<thead>
-		<th>Name</th>
-		<th>Date</th>
-		<th>Location</th>
-		<th>State</th>
-		<th>Host</th>
-		<th>Action</th>
-	</thead>
-</table>
+<div class="events">
+	<fieldset>
+		<legend>Here are some of the events at other states:</legend>
+		<table class="events_table">
+			<thead>
+				<th>Name</th>
+				<th>Date</th>
+				<th>Location</th>
+				<th>State</th>
+				<th>Host</th>
+				<th>Action</th>
+			</thead>
+			<% @other_events.each do |other_event| %>
+			<tr>
+				<td><a href="" class="event_link"><%= other_event.name %></a></td>
+				<td><%= other_event.date %></td>
+				<td><%= other_event.location %></td>
+				<td><%= other_event.state %></td>
+				<td><%= other_event.user_id %></td>
+				<td><a href="join/<%= other_event.id %>">Join</a></td> 
+			</tr>
+			<% end %>
+		</table>
+	</fieldset>
+</div>
 
 <h2>Add Event</h2>
-<form>
-	Name: <input type="text">
-	Date: <input type="text">
-	Location:  <input type="text"> 
-	<select>
-		<option></option>
+<form action="/add_event" method="post">
+	Name: <input type="text" name=event[name]>
+	Date: <input type="text" name=event[date]>
+	Location:  <input type="text" name=event[location]> 
+	<select name=event[state]> 
+		<option value="AL">Alabama</option> 
+		<option value="AK">Alaska</option> 
+		<option value="AZ">Arizona</option> 
+		<option value="AR">Arkansas</option> 
+		<option value="CA">California</option> 
+		<option value="CO">Colorado</option> 
+		<option value="CT">Connecticut</option> 
+		<option value="DE">Delaware</option> 
+		<option value="DC">District Of Columbia</option> 
+		<option value="FL">Florida</option> 
+		<option value="GA">Georgia</option> 
+		<option value="HI">Hawaii</option> 
+		<option value="ID">Idaho</option> 
+		<option value="IL">Illinois</option> 
+		<option value="IN">Indiana</option> 
+		<option value="IA">Iowa</option> 
+		<option value="KS">Kansas</option> 
+		<option value="KY">Kentucky</option> 
+		<option value="LA">Louisiana</option> 
+		<option value="ME">Maine</option> 
+		<option value="MD">Maryland</option> 
+		<option value="MA">Massachusetts</option> 
+		<option value="MI">Michigan</option> 
+		<option value="MN">Minnesota</option> 
+		<option value="MS">Mississippi</option> 
+		<option value="MO">Missouri</option> 
+		<option value="MT">Montana</option> 
+		<option value="NE">Nebraska</option> 
+		<option value="NV">Nevada</option> 
+		<option value="NH">New Hampshire</option> 
+		<option value="NJ">New Jersey</option> 
+		<option value="NM">New Mexico</option> 
+		<option value="NY">New York</option> 
+		<option value="NC">North Carolina</option> 
+		<option value="ND">North Dakota</option> 
+		<option value="OH">Ohio</option> 
+		<option value="OK">Oklahoma</option> 
+		<option value="OR">Oregon</option> 
+		<option value="PA">Pennsylvania</option> 
+		<option value="RI">Rhode Island</option> 
+		<option value="SC">South Carolina</option> 
+		<option value="SD">South Dakota</option> 
+		<option value="TN">Tennessee</option> 
+		<option value="TX">Texas</option> 
+		<option value="UT">Utah</option> 
+		<option value="VT">Vermont</option> 
+		<option value="VA">Virginia</option> 
+		<option value="WA">Washington</option> 
+		<option value="WV">West Virginia</option> 
+		<option value="WI">Wisconsin</option> 
+		<option value="WY">Wyoming</option>
 	</select>
+		<input type="hidden" name=event[user_id] value="<%= session[:current_user_id] %>"/>
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
+	<input type="submit" value="Add">
 </form>
+<div>
+	</h5><%= flash[:error] %></h5>
+</h5><%= flash[:notice] %></h5>
+</div>
+</body>

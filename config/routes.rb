@@ -1,26 +1,30 @@
 Rails.application.routes.draw do
-  #resources :events
+  get 'events/index' 
+
+  resources :events
   #only need 3 restful routes for sessions
   resources :sessions, :only => [:new, :create, :destroy] 
   post "/register" => "users#create"
-  get "/login" => "sessions#create"
+  post "/login" => "sessions#login"
   get "/signout" => "sessions#destroy"
 
-  get 'sessions/new'
+  #add event
+  post '/add_event' => "events#create"
+  
+  #join event
+  get 'join/:id' => 'events#attend' 
 
-  get 'sessions/create'
+  #leave event
+  get 'cancel/:id' => 'events#cancel'
+ 
+  #show event
+  get 'events/show' => 'events#show'
 
-  get 'sessions/destroy'
-
-  get 'events' => 'events/index'
-
-  get 'events/create'
-
-  get 'events/show'
-
+  #edit event
   get 'events/edit'
 
-  get 'events/destroy'
+  #delete event
+  get 'delete/:id' => 'events#destroy'
 
   get 'users/new'
 

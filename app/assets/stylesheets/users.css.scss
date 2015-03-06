@@ -5,3 +5,78 @@ div {
 	display: inline-block;
 	vertical-align:top;
 }
+h1{
+	background-color: white;
+	padding: 7px;
+	margin-left:10px;
+}
+legend{
+	padding: 5px;
+	border: 2px solid #00CCCC;
+	padding-left: 50px;
+	padding-right: 50px;
+}
+input[type=submit]{
+	background-color: #00CCCC;
+	border: 2px solid black;
+}
+.event_link{
+	padding-top:20px;
+}
+
+a:link, :visited{
+	background-color: #00CCCC;
+	padding: 5px;
+	color: white;
+	text-decoration:none;
+	border: 1px solid black;
+}
+table tr {
+	padding: 10px
+}
+.login_reg_errors{
+	display:block;
+	height:20px;
+	color:red;
+	font-size:13px;
+	margin-top:10px;
+}
+.header{
+	height:70px;
+	display: block;
+	background-color: #00CCCC;
+	padding-bottom:10px;
+}
+.header_text{
+	display:inline-block;
+}
+#logout{
+	float:right;
+	margin-right:15px;
+	margin-top:25px;
+}
+legend{
+	font-weight:bold;
+	font-family:arial;
+	border: 2px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color:white;
+	border: 4px solid #00CCCC;
+}
+fieldset{
+	border: 4px solid #00CCCC;
+}
+.events{
+	margin-top:20px;
+}
+td {
+	padding:10px;
+}
+.events_table{
+	font-family: arial;
+	width: 600px;
+}
+th{
+	background-color: #00CCCC;
+}

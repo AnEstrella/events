@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   #before user gets added to DB, run this function
   before_save :encrypt_password
 
-  #ecrypts the user's unencrypted login attempt and retursn true if password is a match
+  #ecrypts the user's unencrypted login attempt and return true if password is a match
   def has_password?(submitted_password)
     self.encrypted_password == encrypt(submitted_password)
   end
